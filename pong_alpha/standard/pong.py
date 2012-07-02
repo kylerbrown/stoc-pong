@@ -79,7 +79,7 @@ def update(dt,theta,arena,pix_record):
 	ball.in_play = game_flow.in_play
 
 	if game_flow.quit_game:
-		print_str="ball\t paddle\ttimestamp\n"
+		print_str="ball\tpaddle\ttimestamp\n"
 		pix_str="pixel flash on\n"
 
 		for i in range(len(ball_clone.record)):
@@ -93,13 +93,13 @@ def update(dt,theta,arena,pix_record):
 		pix_filename = now.strftime("%Y-%m-%d-%H-%M") + "_pix"
 		print filename, pix_filename
 		try:
- 			f = open("/Users/Alex/desktop/PONG!/data/"+filename+".txt", "w")
+ 			f = open("../data/"+filename+".txt", "w")
 			try:
 				f.write(print_str)
 			finally:
 				f.close()
 
-			f = open("/Users/Alex/desktop/PONG!/data/"+pix_filename+".txt", "w")
+			f = open("../data/"+pix_filename+".txt", "w")
 			try:
 				f.write(pix_str)
 			finally:
