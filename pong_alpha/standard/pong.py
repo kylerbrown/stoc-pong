@@ -7,24 +7,26 @@ from game import clone
 from pyglet.gl import *
 
 # Initialize window
-game_window = pyglet.window.Window(600, 600)
+game_window = pyglet.window.Window(fullscreen=True)
+center_x = game_window.width/2
+center_y = game_window.height/2
 
 # Initialize batches
 main_batch = pyglet.graphics.Batch()
 
 # Set theta
-theta = 45
+theta = 90
 
 ## Initialize paddle, ball, and clones as sprites
 # Arena
-arena = arena.Arena(batch=main_batch)
+arena = arena.Arena(x=center_x,y=center_y,batch=main_batch)
 arena.visible = False
-arena_clone = clone.Clone(img=resources.arena_image,x=300,y=300,batch=main_batch)
+arena_clone = clone.Clone(img=resources.arena_image,x=center_x,y=center_y,batch=main_batch)
 arena_clone.rotation = -theta
 
 # Paddle
 paddle_scale = 0.5
-player_paddle = player.Player(x=300,y=175,batch=main_batch)
+player_paddle = player.Player(x=center_x,y=(center_y-125),batch=main_batch)
 player_paddle.visible = False
 player_paddle.scale = paddle_scale
 player_clone = clone.Clone(img=resources.player_image,batch=main_batch)
@@ -34,22 +36,22 @@ player_clone.scale = paddle_scale
 # Synchronization pixel
 sync_pixel = ball.Ball(batch=main_batch)
 sync_pixel.visible = False
-sync_pixel.scale = 0.1
-sync_pixel.x = 5
-sync_pixel.y = 5
+sync_pixel.scale = 0.2
+sync_pixel.x = 20
+sync_pixel.y = 20
 global pix_record
 pix_record = []
 
 # Ball
 ball_scale = 0.3
-ball = ball.Ball(batch=main_batch)
+ball = ball.Ball(x=center_x,y=center_y,batch=main_batch)
 ball.visible = False
 ball.scale = ball_scale
 ball_clone = clone.Clone(img=resources.ball_image,batch=main_batch)
 ball_clone.scale = ball_scale
 
 # Game Flow
-game_flow = ui.UI(batch=main_batch)
+game_flow = ui.UI(game_window,batch=main_batch)
 
 # Push key handlers
 game_window.push_handlers(player_paddle.key_handler)
@@ -65,7 +67,7 @@ def on_draw():
     main_batch.draw()
 
 def update(dt,theta,arena,pix_record):
-	ball.update(dt,arena)
+	ball.update(dt,arena,game_window)
 	ball_clone.update(ball,theta,game_window)
 
 	player_paddle.update(dt,arena)
@@ -79,7 +81,7 @@ def update(dt,theta,arena,pix_record):
 	ball.in_play = game_flow.in_play
 
 	if game_flow.quit_game:
-		print_str="ball\tpaddle\ttimestamp\n"
+		print_str="ball\t paddle\ttimestamp\n"
 		pix_str="pixel flash on\n"
 
 		for i in range(len(ball_clone.record)):

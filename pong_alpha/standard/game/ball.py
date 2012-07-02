@@ -8,13 +8,11 @@ import resources
 class Ball(physicalobject.PhysicalObject):
 	def __init__(self,*args,**kwargs):
 		super(Ball,self).__init__(img=resources.ball_image,*args,**kwargs)
-		self.x = 300
-		self.y = 300
 		self.vel = 220
 		self.gen_rand_angle(self.vel)
 		self.in_play = True
 
-	def update(self,dt,arena):
+	def update(self,dt,arena,game_window):
 		rand_x = 0
 		rand_y = 0
 
@@ -33,8 +31,8 @@ class Ball(physicalobject.PhysicalObject):
 				self.velocity_y = -self.velocity_y
 				self.y += 2*(self.velocity_y * dt)
 			elif self.check_bounds(dt,arena) == "drop":
-				self.x = 300
-				self.y = 300
+				self.x = game_window.width/2
+				self.y = game_window.height/2
 				self.gen_rand_angle(self.vel)
 			else:
 				if random.random() < 0.0:

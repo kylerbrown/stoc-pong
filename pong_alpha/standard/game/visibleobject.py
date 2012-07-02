@@ -10,10 +10,11 @@ class VisibleObject(pyglet.sprite.Sprite):
 		
 	def update(self,twin,theta,game_window):
 		theta_rad = math.radians(theta)
-		d = game_window.width/2
+		tocenter_x = game_window.width/2
+		tocenter_y = game_window.height/2
 
-		dx = 300-(300*(math.cos(theta_rad) - math.sin(theta_rad)))
-		dy = 300-(300*(math.sin(theta_rad) + math.cos(theta_rad)))
+		dx = tocenter_x-(tocenter_x*math.cos(theta_rad) - tocenter_y*math.sin(theta_rad))
+		dy = tocenter_y-(tocenter_x*math.sin(theta_rad) + tocenter_y*math.cos(theta_rad))
 
 		self.x = (twin.x*math.cos(theta_rad) - twin.y*math.sin(theta_rad)) + dx
 		self.y = (twin.x*math.sin(theta_rad) + twin.y*math.cos(theta_rad)) + dy

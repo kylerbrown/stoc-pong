@@ -5,8 +5,6 @@ import pyglet, resources
 class Arena(pyglet.sprite.Sprite):
 	def __init__(self, *args, **kwargs):
 		super(Arena, self).__init__(img=resources.arena_image,*args,**kwargs)
-		self.x = 300
-		self.y = 300
 		
 	def rotate(self, theta):
 		self.rotation = theta
