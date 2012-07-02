@@ -14,6 +14,7 @@ center_y = game_window.height/2
 
 # Initialize batches
 main_batch = pyglet.graphics.Batch()
+cal_batch = pyglet.graphics.Batch()
 
 # Set theta
 theta = int(sys.argv[1])
@@ -24,6 +25,10 @@ arena = arena.Arena(x=center_x,y=center_y,batch=main_batch)
 arena.visible = False
 arena_clone = clone.Clone(img=resources.arena_image,x=center_x,y=center_y,batch=main_batch)
 arena_clone.rotation = -theta
+arena_clone.visible = False
+
+print arena.width, arena.image.width
+print arena.height, arena.image.height
 
 # Paddle
 paddle_scale = 0.5
@@ -42,6 +47,15 @@ sync_pixel.x = 20
 sync_pixel.y = 20
 global pix_record
 pix_record = []
+
+# Calibration dots
+dot1 = ball.Ball(x=center_x+150,y=center_y,batch=cal_batch)
+dot2 = ball.Ball(x=center_x,y=center_y-150,batch=cal_batch)
+dot3 = ball.Ball(x=center_x-150,y=center_y,batch=cal_batch)
+dot4 = ball.Ball(x=center_x,y=center_y+150,batch=cal_batch)
+dots = [dot1, dot2, dot3, dot4]
+for dot in dots:
+	dot.scale = 0.3
 
 # Ball
 ball_scale = 0.3
@@ -66,6 +80,7 @@ def on_draw():
     game_window.clear()
     # draw game elements
     main_batch.draw()
+    cal_batch.draw()
 
 def update(dt,theta,arena,pix_record):
 	ball.update(dt,arena,game_window)
@@ -81,6 +96,17 @@ def update(dt,theta,arena,pix_record):
 
 	ball.in_play = game_flow.in_play
 
+	if ball.in_play == True:
+		arena_clone.visible = True
+		player_clone.visible = True
+		for dot in dots:
+			dot.visible = False
+	else:
+		arena_clone.visible = False
+		player_clone.visible = False
+		for dot in dots:
+			dot.visible = True
+
 	if game_flow.quit_game:
 		print_str="ball\t paddle\ttimestamp\n"
 		pix_str="pixel flash on\n"
@@ -93,8 +119,6 @@ def update(dt,theta,arena,pix_record):
 
 		now = datetime.datetime.now()
 		filename = sys.argv[2]
-		#filename = now.strftime("%Y-%m-%d-%H-%M")
-		#pix_filename = now.strftime("%Y-%m-%d-%H-%M") + "_pix"
 		print filename
 		try:
  			f = open("../data/"+filename+".txt", "w")

@@ -36,8 +36,8 @@ class Ball(physicalobject.PhysicalObject):
 				self.gen_rand_angle(self.vel)
 			else:
 				if random.random() < 0.0:
-					rand_x = random.random() * 5
-					rand_y = random.random() * 5
+					rand_x = random.random() * 10
+					rand_y = random.random() * 10
 				self.x += self.velocity_x * dt + rand_x
 				self.y += self.velocity_y * dt + rand_y
 
