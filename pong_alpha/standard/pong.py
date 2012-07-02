@@ -5,6 +5,7 @@ from pyglet.window import key
 from game import resources, player, ball, arena, ui
 from game import clone
 from pyglet.gl import *
+import sys
 
 # Initialize window
 game_window = pyglet.window.Window(fullscreen=True)
@@ -15,7 +16,7 @@ center_y = game_window.height/2
 main_batch = pyglet.graphics.Batch()
 
 # Set theta
-theta = 90
+theta = int(sys.argv[1])
 
 ## Initialize paddle, ball, and clones as sprites
 # Arena
@@ -91,9 +92,10 @@ def update(dt,theta,arena,pix_record):
 			pix_str = pix_str + repr(rec) + "\n"			
 
 		now = datetime.datetime.now()
-		filename = now.strftime("%Y-%m-%d-%H-%M")
-		pix_filename = now.strftime("%Y-%m-%d-%H-%M") + "_pix"
-		print filename, pix_filename
+		filename = sys.argv[2]
+		#filename = now.strftime("%Y-%m-%d-%H-%M")
+		#pix_filename = now.strftime("%Y-%m-%d-%H-%M") + "_pix"
+		print filename
 		try:
  			f = open("../data/"+filename+".txt", "w")
 			try:
@@ -101,7 +103,7 @@ def update(dt,theta,arena,pix_record):
 			finally:
 				f.close()
 
-			f = open("../data/"+pix_filename+".txt", "w")
+			f = open("../data/"+filename+"_sync.txt", "w")
 			try:
 				f.write(pix_str)
 			finally:
