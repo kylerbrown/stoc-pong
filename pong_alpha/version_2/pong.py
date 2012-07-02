@@ -3,7 +3,7 @@
 import pyglet, random, datetime, math
 from pyglet.window import key
 from game import resources, player, ball, arena, ui
-from game import playerclone, ballclone, arenaclone
+from game import clone
 from pyglet.gl import *
 
 # Initialize window
@@ -11,34 +11,36 @@ game_window = pyglet.window.Window(600, 600)
 
 # Initialize batches
 main_batch = pyglet.graphics.Batch()
-alt_batch = pyglet.graphics.Batch()
 
 # Set theta
 theta = 45
 
-# Initialize paddle, ball, and clones as sprites
+## Initialize paddle, ball, and clones as sprites
+# Arena
 arena = arena.Arena(batch=main_batch)
 arena.visible = False
-arena_clone = arenaclone.ArenaClone(batch=main_batch)
+arena_clone = clone.Clone(img=resources.arena_image,x=300,y=300,batch=main_batch)
 arena_clone.rotation = -theta
 
+# Paddle
+paddle_scale = 0.5
 player_paddle = player.Player(x=300,y=175,batch=main_batch)
 player_paddle.visible = False
-player_paddle.scale = 0.5
-player_clone = playerclone.PlayerClone(batch=main_batch)
+player_paddle.scale = paddle_scale
+player_clone = clone.Clone(img=resources.player_image,batch=main_batch)
 player_clone.rotation = -theta
-player_clone.scale = 0.5
+player_clone.scale = paddle_scale
 
+# Ball
+ball_scale = 0.3
 ball = ball.Ball(batch=main_batch)
 ball.visible = False
-ball.scale = 0.3
-ball_clone = ballclone.BallClone(batch=main_batch)
-ball_clone.scale = 0.33
+ball.scale = ball_scale
+ball_clone = clone.Clone(img=resources.ball_image,batch=main_batch)
+ball_clone.scale = ball_scale
 
+# Game Flow
 game_flow = ui.UI(batch=main_batch)
-
-# Initialize game objects to a list
-game_objects = [player_paddle, ball]
 
 # Push key handlers
 game_window.push_handlers(player_paddle.key_handler)
