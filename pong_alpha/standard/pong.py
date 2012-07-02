@@ -25,7 +25,7 @@ arena = arena.Arena(x=center_x,y=center_y,batch=main_batch)
 arena.visible = False
 arena_clone = clone.Clone(img=resources.arena_image,x=center_x,y=center_y,batch=main_batch)
 arena_clone.rotation = -theta
-arena_clone.visible = False
+#arena_clone.visible = False
 
 print arena.width, arena.image.width
 print arena.height, arena.image.height
@@ -53,7 +53,8 @@ dot1 = ball.Ball(x=center_x+150,y=center_y,batch=cal_batch)
 dot2 = ball.Ball(x=center_x,y=center_y-150,batch=cal_batch)
 dot3 = ball.Ball(x=center_x-150,y=center_y,batch=cal_batch)
 dot4 = ball.Ball(x=center_x,y=center_y+150,batch=cal_batch)
-dots = [dot1, dot2, dot3, dot4]
+dot5 = ball.Ball(x=center_x,y=center_y,batch=cal_batch)
+dots = [dot1, dot2, dot3, dot4, dot5]
 for dot in dots:
 	dot.scale = 0.3
 
@@ -99,11 +100,13 @@ def update(dt,theta,arena,pix_record):
 	if ball.in_play == True:
 		arena_clone.visible = True
 		player_clone.visible = True
+		ball_clone.visible = True
 		for dot in dots:
 			dot.visible = False
 	else:
 		arena_clone.visible = False
 		player_clone.visible = False
+		ball_clone.visible = False
 		for dot in dots:
 			dot.visible = True
 

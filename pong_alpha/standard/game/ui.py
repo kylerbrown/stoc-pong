@@ -8,7 +8,7 @@ class UI():
 		self.key_handler = key.KeyStateHandler()
 		center_x = game_window.width/2
 		center_y = game_window.height/2
-		self.quit_text = pyglet.text.Label(text="Quit Game? Y/N",x=center_x, y=center_y,anchor_x='center',*args,**kwargs)
+		self.quit_text = pyglet.text.Label(text="Quit Game? Y/N",x=center_x, y=center_y+40,anchor_x='center',*args,**kwargs)
 		self.quit_text.color = (255,255,255,0)
 		self.quit_game = False
 		self.in_play = False
