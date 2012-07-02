@@ -1,6 +1,6 @@
 # PONG.PY - basic pong game
 
-import pyglet, random, datetime, math
+import pyglet, random, datetime, math, time
 from pyglet.window import key
 from game import resources, player, ball, arena, ui
 from game import clone
@@ -31,6 +31,15 @@ player_clone = clone.Clone(img=resources.player_image,batch=main_batch)
 player_clone.rotation = -theta
 player_clone.scale = paddle_scale
 
+# Synchronization pixel
+sync_pixel = ball.Ball(batch=main_batch)
+sync_pixel.visible = False
+sync_pixel.scale = 0.1
+sync_pixel.x = 5
+sync_pixel.y = 5
+global pix_record
+pix_record = []
+
 # Ball
 ball_scale = 0.3
 ball = ball.Ball(batch=main_batch)
@@ -54,9 +63,8 @@ def on_draw():
     game_window.clear()
     # draw game elements
     main_batch.draw()
-    alt_batch.draw()
 
-def update(dt,theta,arena):
+def update(dt,theta,arena,pix_record):
 	ball.update(dt,arena)
 	ball_clone.update(ball,theta,game_window)
 
@@ -71,26 +79,50 @@ def update(dt,theta,arena):
 	ball.in_play = game_flow.in_play
 
 	if game_flow.quit_game:
-		print_str="ball \t paddle \n"
+		print_str="ball\t paddle\ttimestamp\n"
+		pix_str="pixel flash on\n"
+
 		for i in range(len(ball_clone.record)):
 			print_str = print_str+repr(ball_clone.record[i])+"\t"+repr(player_clone.record[i])+"\n"
+
+		for rec in pix_record:
+			pix_str = pix_str + repr(rec) + "\n"			
+
 		now = datetime.datetime.now()
 		filename = now.strftime("%Y-%m-%d-%H-%M")
-		print filename
+		pix_filename = now.strftime("%Y-%m-%d-%H-%M") + "_pix"
+		print filename, pix_filename
 		try:
  			f = open("/Users/Alex/desktop/PONG!/data/"+filename+".txt", "w")
 			try:
 				f.write(print_str)
 			finally:
 				f.close()
+
+			f = open("/Users/Alex/desktop/PONG!/data/"+pix_filename+".txt", "w")
+			try:
+				f.write(pix_str)
+			finally:
+				f.close()
+
 		except IOError:
 			pass
 		game_window.close()
+
+def sync_on(dt, record):
+	sync_pixel.visible = True
+	record.append(time.time())
+	pyglet.clock.schedule_once(sync_off, 0.01)
+
+def sync_off(dt):
+	sync_pixel.visible = False
 
 	
 # Run the code
 if __name__ == '__main__':
     # run update 120 time per second
-    pyglet.clock.schedule_interval(update, 1/200.0, theta, arena)
+    record = []
+    pyglet.clock.schedule_interval(update, 1/200.0, theta, arena, pix_record)
+    pyglet.clock.schedule_interval(sync_on, 1, pix_record)
     # run pyglet
     pyglet.app.run()

@@ -13,9 +13,9 @@ class PhysicalObject(pyglet.sprite.Sprite):
 		arena_xl, arena_xr, arena_yl, arena_yr = arena.get_bounds()
 
 		min_x = self.width/2 + (arena_xl + 7)
-		min_y = self.height/2 + (arena_yl)
+		min_y = self.height/2 + (arena_yl + 7)
 		max_x = (arena_xr - 7) - self.width/2
-		max_y = (arena_yr) - self.height/2
+		max_y = (arena_yr - 7) - self.height/2
 
 		if self.x < min_x:
 			return "bound_xl"

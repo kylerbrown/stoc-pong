@@ -10,8 +10,8 @@ class Ball(physicalobject.PhysicalObject):
 		super(Ball,self).__init__(img=resources.ball_image,*args,**kwargs)
 		self.x = 300
 		self.y = 300
-		self.velocity_x = random.random() * 200 + 100
-		self.velocity_y = random.random() * -200 - 100
+		self.vel = 220
+		self.gen_rand_angle(self.vel)
 		self.in_play = True
 
 	def update(self,dt,arena):
@@ -35,14 +35,18 @@ class Ball(physicalobject.PhysicalObject):
 			elif self.check_bounds(dt,arena) == "drop":
 				self.x = 300
 				self.y = 300
-				self.velocity_x = random.random() * 200 + 100
-				self.velocity_y = random.random() * -200 - 100
+				self.gen_rand_angle(self.vel)
 			else:
-				if random.random() < 0.15:
+				if random.random() < 0.0:
 					rand_x = random.random() * 5
 					rand_y = random.random() * 5
 				self.x += self.velocity_x * dt + rand_x
 				self.y += self.velocity_y * dt + rand_y
+
+	def gen_rand_angle(self, vel):
+		angle = math.radians((random.random() * 50) - 25)
+		self.velocity_x = math.sin(angle) * vel
+		self.velocity_y = math.cos(angle) * -vel
 
 	def collides_with(self,paddle):
 		min_y = self.height/2 + paddle.y + paddle.height/2
