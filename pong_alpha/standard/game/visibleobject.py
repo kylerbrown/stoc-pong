@@ -22,4 +22,4 @@ class VisibleObject(pyglet.sprite.Sprite):
 		self.make_record()
 
 	def make_record(self):
-		self.record.append([self.x,self.y,time.time()])
+		self.record.append(repr(self.x)+"\t"+repr(self.y)+"\t"+repr(time.time()))
