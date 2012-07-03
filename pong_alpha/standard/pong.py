@@ -42,17 +42,17 @@ player_clone.scale = paddle_scale
 # Synchronization pixel
 sync_pixel = ball.Ball(batch=main_batch)
 sync_pixel.visible = False
-sync_pixel.scale = 0.2
-sync_pixel.x = 20
-sync_pixel.y = 20
+sync_pixel.scale = 1
+sync_pixel.x = 50
+sync_pixel.y = 50
 global pix_record
 pix_record = []
 
 # Calibration dots
-dot1 = ball.Ball(x=center_x+150,y=center_y,batch=cal_batch)
-dot2 = ball.Ball(x=center_x,y=center_y-150,batch=cal_batch)
-dot3 = ball.Ball(x=center_x-150,y=center_y,batch=cal_batch)
-dot4 = ball.Ball(x=center_x,y=center_y+150,batch=cal_batch)
+dot1 = ball.Ball(x=center_x+159,y=center_y,batch=cal_batch)
+dot2 = ball.Ball(x=center_x,y=center_y-181,batch=cal_batch)
+dot3 = ball.Ball(x=center_x-159,y=center_y,batch=cal_batch)
+dot4 = ball.Ball(x=center_x,y=center_y+181,batch=cal_batch)
 dot5 = ball.Ball(x=center_x,y=center_y,batch=cal_batch)
 dots = [dot1, dot2, dot3, dot4, dot5]
 for dot in dots:
