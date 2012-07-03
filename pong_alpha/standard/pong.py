@@ -95,7 +95,10 @@ def update(dt,theta,arena,pix_record):
 	if ball.collides_with(player_paddle):
 		ball.handle_collision(dt)
 
-	ball.in_play = game_flow.in_play
+	if game_flow.in_play == "during":
+		ball.in_play = True
+	else:
+		ball.in_play = False
 
 	if ball.in_play == True:
 		arena_clone.visible = True
@@ -141,9 +144,10 @@ def update(dt,theta,arena,pix_record):
 		game_window.close()
 
 def sync_on(dt, record):
-	sync_pixel.visible = True
-	record.append(time.time())
-	pyglet.clock.schedule_once(sync_off, 0.01)
+	if not (game_flow.in_play == "before"):
+		sync_pixel.visible = True
+		record.append(time.time())
+		pyglet.clock.schedule_once(sync_off, 0.01)
 
 def sync_off(dt):
 	sync_pixel.visible = False

@@ -11,17 +11,17 @@ class UI():
 		self.quit_text = pyglet.text.Label(text="Quit Game? Y/N",x=center_x, y=center_y+40,anchor_x='center',*args,**kwargs)
 		self.quit_text.color = (255,255,255,0)
 		self.quit_game = False
-		self.in_play = False
+		self.in_play = "before"
 
 	def update(self,dt):
-		if self.in_play:
+		if self.in_play == "during":
 			self.quit_text.color = (255,255,255,0)
 		if self.key_handler[key.UP]:
-			self.in_play = True
+			self.in_play = "during"
 		if self.key_handler[key.SPACE]:
-			self.in_play = False
+			self.in_play = "paused"
 			self.quit_text.color = (255,255,255,255)
-		if not self.in_play:
+		if self.in_play == "paused":
 			if self.key_handler[key.Y]:
 				self.quit_game = True
 			if self.key_handler[key.N]:
