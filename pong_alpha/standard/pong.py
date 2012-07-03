@@ -49,10 +49,10 @@ global pix_record
 pix_record = []
 
 # Calibration dots
-dot1 = ball.Ball(x=center_x+159,y=center_y,batch=cal_batch)
-dot2 = ball.Ball(x=center_x,y=center_y-181,batch=cal_batch)
-dot3 = ball.Ball(x=center_x-159,y=center_y,batch=cal_batch)
-dot4 = ball.Ball(x=center_x,y=center_y+181,batch=cal_batch)
+dot1 = ball.Ball(x=center_x+186,y=center_y,batch=cal_batch)
+dot2 = ball.Ball(x=center_x,y=center_y-245,batch=cal_batch)
+dot3 = ball.Ball(x=center_x-186,y=center_y,batch=cal_batch)
+dot4 = ball.Ball(x=center_x,y=center_y+245,batch=cal_batch)
 dot5 = ball.Ball(x=center_x,y=center_y,batch=cal_batch)
 dots = [dot1, dot2, dot3, dot4, dot5]
 for dot in dots:
