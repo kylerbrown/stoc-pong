@@ -113,6 +113,39 @@ def update(dt,theta,arena,pix_record):
 		for dot in dots:
 			dot.visible = True
 
+	if game_flow.in_play == "paused":
+		#print_str="ball\t paddle\ttimestamp\n"
+		print_str = ""
+		#pix_str="pixel flash on\n"
+		pix_str = ""
+
+		for i in range(len(ball_clone.record)):
+			print_str = print_str+repr(ball_clone.record[i])+"\t"+repr(player_clone.record[i])+"\n"
+
+		for rec in pix_record:
+			pix_str = pix_str + repr(rec) + "\n"			
+
+		now = datetime.datetime.now()
+		filename = sys.argv[2]
+		print filename
+		try:
+ 			f = open("../data/"+filename+".txt", "a")
+			try:
+				f.write(print_str)
+			finally:
+				f.close()
+
+			f = open("../data/"+filename+"_sync.txt", "a")
+			try:
+				f.write(pix_str)
+			finally:
+				f.close()
+		except IOError:
+			pass
+
+		ball_clone.record = []
+		player_clone.record = []
+
 	if game_flow.quit_game:
 		print_str="ball\t paddle\ttimestamp\n"
 		pix_str="pixel flash on\n"
@@ -127,13 +160,13 @@ def update(dt,theta,arena,pix_record):
 		filename = sys.argv[2]
 		print filename
 		try:
- 			f = open("../data/"+filename+".txt", "w")
+ 			f = open("../data/"+filename+".txt", "a")
 			try:
 				f.write(print_str)
 			finally:
 				f.close()
 
-			f = open("../data/"+filename+"_sync.txt", "w")
+			f = open("../data/"+filename+"_sync.txt", "a")
 			try:
 				f.write(pix_str)
 			finally:
