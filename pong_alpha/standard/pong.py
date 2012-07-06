@@ -181,7 +181,8 @@ def sync_on(dt, record):
 	if not (game_flow.in_play == "before"):
 		sync_pixel.visible = True
 		record.append(time.time())
-		pyglet.clock.schedule_once(sync_off, 0.01)
+		# increased spot duration to 0.5 s 
+		pyglet.clock.schedule_once(sync_off, 0.5)
 
 def sync_off(dt):
 	sync_pixel.visible = False
@@ -192,6 +193,7 @@ if __name__ == '__main__':
     # run update 120 time per second
     record = []
     pyglet.clock.schedule_interval(update, 1/200.0, theta, arena, pix_record)
-    pyglet.clock.schedule_interval(sync_on, 1, pix_record)
+    # decreased spot frequency to once every 2 s
+    pyglet.clock.schedule_interval(sync_on, 2, pix_record)
     # run pyglet
     pyglet.app.run()
