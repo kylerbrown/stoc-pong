@@ -2,6 +2,7 @@
 
 import pyglet, random, datetime, math, time, sys
 from pyglet.window import key
+from pyglet import clock
 from game import resources, player, ball, arena, ui, clone
 from pyglet.gl import *
 
@@ -182,7 +183,6 @@ def sync_on(dt, record):
 	if not (game_flow.in_play == "before"):
 		sync_pixel.visible = True
 		record.append(time.time())
-		print record[-1]
 		# increased spot duration to 0.5 s 
 		pyglet.clock.schedule_once(sync_off, 0.5)
 
