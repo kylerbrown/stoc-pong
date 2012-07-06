@@ -1,11 +1,9 @@
 # PONG.PY - basic pong game
 
-import pyglet, random, datetime, math, time
+import pyglet, random, datetime, math, time, sys
 from pyglet.window import key
-from game import resources, player, ball, arena, ui
-from game import clone
+from game import resources, player, ball, arena, ui, clone
 from pyglet.gl import *
-import sys
 
 # Initialize window
 game_window = pyglet.window.Window(fullscreen=True,vsync=True)
@@ -16,7 +14,10 @@ center_y = game_window.height/2
 main_batch = pyglet.graphics.Batch()
 cal_batch = pyglet.graphics.Batch()
 
-# Set theta
+# Set game orientation in degrees from commmand line
+# 0	--	paddle is horizantal on the bottom edge of the arena
+# positive degrees correspond to counter-clockwise rotation about the screen 
+# center
 theta = int(sys.argv[1])
 
 ## Initialize paddle, ball, and clones as sprites
@@ -157,9 +158,9 @@ def update(dt,theta,arena,pix_record):
 		for rec in pix_record:
 			pix_str = pix_str + repr(rec) + "\n"			
 
-		now = datetime.datetime.now()
+		# now = datetime.datetime.now()
 		filename = sys.argv[2]
-		print filename
+		# print filename
 		try:
  			f = open("../data/"+filename+".txt", "a")
 			try:
@@ -181,6 +182,7 @@ def sync_on(dt, record):
 	if not (game_flow.in_play == "before"):
 		sync_pixel.visible = True
 		record.append(time.time())
+		print record[-1]
 		# increased spot duration to 0.5 s 
 		pyglet.clock.schedule_once(sync_off, 0.5)
 

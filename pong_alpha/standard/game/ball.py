@@ -3,7 +3,6 @@
 import pyglet, math, random, physicalobject
 from pyglet.window import key
 import resources
-# import ui - will control user actions
 
 class Ball(physicalobject.PhysicalObject):
 	def __init__(self,*args,**kwargs):
@@ -42,7 +41,9 @@ class Ball(physicalobject.PhysicalObject):
 				self.y += self.velocity_y * dt + rand_y
 
 	def gen_rand_angle(self, vel):
-		angle = math.radians((random.random() * 50) - 25)
+		# paramterized and increased maximum angle
+		max_angle = 120
+		angle = math.radians((random.random() * max_angle) - max_angle/2)
 		self.velocity_x = math.sin(angle) * vel
 		self.velocity_y = math.cos(angle) * -vel
 

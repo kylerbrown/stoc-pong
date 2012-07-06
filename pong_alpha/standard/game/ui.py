@@ -25,4 +25,4 @@ class UI():
 			if self.key_handler[key.Y]:
 				self.quit_game = True
 			if self.key_handler[key.N]:
-				self.quit_game = False
+				self.in_play = "during"
