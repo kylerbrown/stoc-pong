@@ -128,7 +128,7 @@ def update(dt,theta,arena,pix_record):
 
 		now = datetime.datetime.now()
 		filename = sys.argv[2]
-		# print filename
+		print filename
 		try:
  			f = open("../data/"+filename+".txt", "a")
 			try:
