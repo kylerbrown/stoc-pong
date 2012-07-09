@@ -28,5 +28,5 @@ class Player(pyglet.sprite.Sprite):
 		radius, self.theta = self.calc.toPolar(self.x,self.y)
 		self.minTheta = self.theta - self.subtend
 		self.maxTheta = self.theta + self.subtend
-		#print radius
+		print radius
 		

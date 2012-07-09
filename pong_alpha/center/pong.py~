@@ -49,8 +49,8 @@ def on_draw():
     mainBatch.draw()
 
 def update(dt):
-	pongBall.update(dt,playerPaddle,values)			# update ball
 	playerPaddle.update(dt,values)					# update paddle
+	pongBall.update(dt,playerPaddle,values)			# update ball
     
 # Run the code
 if __name__ == '__main__':

@@ -1,11 +1,9 @@
-# GEOMETRY.PY
-
 import math, random
 
 class Geometry():
-	def __init__(self,constants,*args,**kwargs):
-		self.centerX = constants.centerX
-		self.centerY = constants.centerY
+	def __init__(self,*args,**kwargs):
+		self.centerX = 300
+		self.centerY = 300
 		
 	def eps(self):
 		x = 0.5
@@ -43,5 +41,3 @@ class Geometry():
 		xVel = math.sin(theta) * speed
 		yVel = math.cos(theta) * speed
 		return xVel, yVel
-	
-	

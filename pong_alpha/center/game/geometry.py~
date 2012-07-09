@@ -2,7 +2,7 @@
 
 import math, random
 
-class Geometry():
+class Geometry()
 	def __init__(self,constants,*args,**kwargs):
 		self.centerX = constants.centerX
 		self.centerY = constants.centerY
