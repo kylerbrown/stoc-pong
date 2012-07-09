@@ -86,7 +86,8 @@ def on_draw():
     cal_batch.draw()
     ball_clone.draw()
 
-def update(dt,theta,arena,pix_record):
+def update(dt,theta,arena):
+	global pix_record
 	ball.update(dt,arena,game_window)
 	ball_clone.update(ball,theta,game_window)
 
@@ -127,7 +128,7 @@ def update(dt,theta,arena,pix_record):
 
 		for rec in pix_record:
 			pix_str = pix_str + repr(rec) + "\n"			
-
+		print pix_str
 		now = datetime.datetime.now()
 		filename = sys.argv[2]
 		# print filename
@@ -148,6 +149,7 @@ def update(dt,theta,arena,pix_record):
 
 		ball_clone.record = []
 		player_clone.record = []
+		pix_record=[]
 
 	if game_flow.quit_game:
 		print_str="ball\t paddle\ttimestamp\n"
@@ -158,7 +160,7 @@ def update(dt,theta,arena,pix_record):
 
 		for rec in pix_record:
 			pix_str = pix_str + repr(rec) + "\n"			
-
+		
 		# now = datetime.datetime.now()
 		filename = sys.argv[2]
 		# print filename
@@ -179,10 +181,13 @@ def update(dt,theta,arena,pix_record):
 			pass
 		game_window.close()
 
-def sync_on(dt, record):
+def sync_on(dt):
+	global pix_record
 	if not (game_flow.in_play == "before"):
 		sync_pixel.visible = True
-		record.append(time.time())
+		pix_record.append(time.time())
+		# print record
+		# print "\n"
 		# increased spot duration to 0.5 s 
 		pyglet.clock.schedule_once(sync_off, 0.5)
 
@@ -192,10 +197,10 @@ def sync_off(dt):
 	
 # Run the code
 if __name__ == '__main__':
-    # run update 120 time per second
+    # run update 120 times per second
     record = []
-    pyglet.clock.schedule_interval(update, 1/200.0, theta, arena, pix_record)
+    pyglet.clock.schedule_interval(update, 1/200.0, theta, arena)
     # decreased spot frequency to once every 2 s
-    pyglet.clock.schedule_interval(sync_on, 2, pix_record)
+    pyglet.clock.schedule_interval(sync_on, 2)
     # run pyglet
     pyglet.app.run()
