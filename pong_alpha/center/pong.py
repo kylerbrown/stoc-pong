@@ -4,7 +4,7 @@ import pyglet
 from game import constants, resources, player, ball, geometry
 
 # initialize window
-gameWindow = pyglet.window.Window(vsync=True)
+gameWindow = pyglet.window.Window(fullscreen=True,vsync=True)
 
 # get game constants
 values = constants.Constants(gameWindow)

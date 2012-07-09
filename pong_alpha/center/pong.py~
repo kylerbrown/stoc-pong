@@ -4,7 +4,7 @@ import pyglet
 from game import constants, resources, player, ball, geometry
 
 # initialize window
-gameWindow = pyglet.window.Window(vsync=True)
+gameWindow = pyglet.window.Window(fullscreen=True,vsync=True)
 
 # get game constants
 values = constants.Constants(gameWindow)
@@ -49,8 +49,8 @@ def on_draw():
     mainBatch.draw()
 
 def update(dt):
-	playerPaddle.update(dt,values)					# update paddle
 	pongBall.update(dt,playerPaddle,values)			# update ball
+	playerPaddle.update(dt,values)					# update paddle
     
 # Run the code
 if __name__ == '__main__':

@@ -1,4 +1,4 @@
-# CONSTANTS.PY - stores game constants
+# CONSTANTS.PY - set game constants here
 
 import math
 
@@ -15,7 +15,8 @@ class Constants():
 		# scaling information for path.png 
 		#  based on original radius of 150px
 		#  also used for paddle placement
-		# scales
+		
+		# element scales
 		self.pathScale = self.gameRadius/self.pathRadius
 		self.ballScale = 0.3
 		self.paddleScale = 0.5

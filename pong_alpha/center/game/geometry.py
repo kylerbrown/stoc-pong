@@ -1,18 +1,22 @@
-# GEOMETRY.PY
+# GEOMETRY.PY - defines necessary geometric operations
 
 import math, random
 
 class Geometry():
 	def __init__(self,constants,*args,**kwargs):
+		# import game constants
 		self.centerX = constants.centerX
 		self.centerY = constants.centerY
-		
+	
+	# returns the smallest representable number [UNUSED]
+	'''
 	def eps(self):
 		x = 0.5
 		while 0.0 + x != 0.0:
 			epsilon = x
 			x /= 2.0
 		return epsilon
+	'''
 
 	def toPolar(self,xPos,yPos):
 		xAdj = xPos - self.centerX

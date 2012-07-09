@@ -7,17 +7,17 @@ import geometry, resources
 class Ball(pyglet.sprite.Sprite):
 	def __init__(self,constants,geometry,*args,**kwargs):
 		super(Ball,self).__init__(img=resources.ball_image,*args,**kwargs)
-		self.calc = geometry
 		self.speed = 100
+		# import geometric operations
+		self.calc = geometry
 		self.xVel, self.yVel = self.calc.randomAngle(self.speed)
+		# import constants
 		self.x = constants.centerX
 		self.y = constants.centerY
 		self.maxRadius = constants.gameRadius
 	
 	def checkBounds(self,paddle):
 		radiusBall, thetaBall = self.calc.toPolar(self.x,self.y)
-		#print radiusBall
-		#print thetaBall, "[", paddle.minTheta, paddle.theta, paddle.maxTheta, "]"
 		if radiusBall > (self.maxRadius - 5):
 			return "drop"
 		elif radiusBall > (self.maxRadius - 10) and (thetaBall > paddle.minTheta and thetaBall < paddle.maxTheta):
@@ -26,11 +26,9 @@ class Ball(pyglet.sprite.Sprite):
 			return "center"
 		else:
 			return "in bounds"
-		
-	
+			
 	def update(self,dt,paddle,constants):
 		status = self.checkBounds(paddle)
-		print status
 		if status == "in bounds":
 			self.x += self.xVel * dt
 			self.y += self.yVel * dt
