@@ -51,8 +51,7 @@ class Ball(physicalobject.PhysicalObject):
 		min_y = self.height/2 + paddle.y + paddle.height/2
 		min_x = paddle.x - paddle.width/2
 		max_x = paddle.x + paddle.width/2
-		collision = (self.y < min_y) and (self.y > min_y - 5) and \
-			(self.x > min_x and self.x < max_x)
+		collision = (self.y < min_y) and (self.y > min_y - 5) and (self.x > min_x and self.x < max_x)
 		return(collision)
 
 	def handle_collision(self, dt):

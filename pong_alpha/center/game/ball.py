@@ -20,7 +20,8 @@ class Ball(pyglet.sprite.Sprite):
 		radiusBall, thetaBall = self.calc.toPolar(self.x,self.y)
 		if radiusBall > (self.maxRadius - 5):
 			return "drop"
-		elif radiusBall > (self.maxRadius - 10) and (thetaBall > paddle.minTheta and thetaBall < paddle.maxTheta):
+		elif radiusBall > (self.maxRadius - 10) and \
+			(thetaBall > paddle.minTheta and thetaBall < paddle.maxTheta):
 			return "collision"
 		elif radiusBall < 1 and radiusBall > -1:
 			return "center"

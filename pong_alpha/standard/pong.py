@@ -25,7 +25,8 @@ theta = int(sys.argv[1])
 # Arena
 arena = arena.Arena(x=center_x,y=center_y,batch=main_batch)
 arena.visible = False
-arena_clone = clone.Clone(img=resources.arena_image,x=center_x,y=center_y,batch=main_batch)
+arena_clone = clone.Clone(img=resources.arena_image,x=center_x,y=center_y,
+							batch=main_batch)
 arena_clone.rotation = -theta
 #arena_clone.visible = False
 
@@ -124,7 +125,8 @@ def update(dt,theta,arena):
 		pix_str = ""
 
 		for i in range(len(ball_clone.record)):
-			print_str = print_str+repr(ball_clone.record[i])+"\t"+repr(player_clone.record[i])+"\n"
+			print_str = print_str+repr(ball_clone.record[i])+"\t"+ \ 
+				repr(player_clone.record[i])+"\n"
 
 		for rec in pix_record:
 			pix_str = pix_str + repr(rec) + "\n"			
@@ -156,7 +158,8 @@ def update(dt,theta,arena):
 		pix_str="pixel flash on\n"
 
 		for i in range(len(ball_clone.record)):
-			print_str = print_str+repr(ball_clone.record[i])+"\t"+repr(player_clone.record[i])+"\n"
+			print_str = print_str+repr(ball_clone.record[i])+"\t"+ \
+				repr(player_clone.record[i])+"\n"
 
 		for rec in pix_record:
 			pix_str = pix_str + repr(rec) + "\n"			

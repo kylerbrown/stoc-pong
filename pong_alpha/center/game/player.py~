@@ -11,7 +11,6 @@ class Player(pyglet.sprite.Sprite):
 		self.key_handler = key.KeyStateHandler()
 		# import geometric operations
 		self.calc = geometry
-		
 		# set initial position from game constants
 		self.x = constants.centerX
 		yPos=constants.centerY-constants.gameRadius*(1-(constants.pathWidth/constants.pathRadius)) 

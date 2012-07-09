@@ -13,7 +13,8 @@ class Player(pyglet.sprite.Sprite):
 		self.calc = geometry
 		# set initial position from game constants
 		self.x = constants.centerX
-		yPos=constants.centerY-constants.gameRadius*(1-(constants.pathWidth/constants.pathRadius)) 
+		yPos=constants.centerY-constants.gameRadius* \
+			(1-(constants.pathWidth/constants.pathRadius)) 
 		self.y = yPos
 
 		
