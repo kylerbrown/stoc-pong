@@ -2,7 +2,7 @@
 
 import pyglet, math
 from pyglet.window import key
-import geometry, resources, record
+import geometry, resources
 
 class Ball(pyglet.sprite.Sprite):
 	def __init__(self,constants,geometry,*args,**kwargs):

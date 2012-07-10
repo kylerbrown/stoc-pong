@@ -42,7 +42,10 @@ playerPaddle = player.Player(constants=values,geometry=geom,batch=mainBatch)
 playerPaddle.scale = values.paddleScale
 paddleRecord = record.Record(playerPaddle)	# paddle position and time data
 # synchronization dot
-syncDot = pyglet.sprite.Sprite(img=resources.ball_image,batch=mainBatch)
+syncDot = pyglet.sprite.Sprite(img=resources.ball_image,
+								x=50,
+								y=50,
+								batch=mainBatch)
 syncDot.visible = False
 syncRecord = record.Record(syncDot)			# sync dot position and time data
 
@@ -75,7 +78,6 @@ def sync_on(dt):
 
 def sync_off(dt):
 	syncDot.visible = False
-	
     
 # Run the code
 if __name__ == '__main__':
