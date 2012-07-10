@@ -81,5 +81,7 @@ def sync_off(dt):
 if __name__ == '__main__':
 	# schedule the update function at 200 Hz
 	pyglet.clock.schedule_interval(update,1/200.0)
+	# schedule the sync dot update function for 0.5 Hz
+	pyglet.clock.schedule_interval(sync_on,2)
     # run pyglet
 	pyglet.app.run()
