@@ -19,4 +19,3 @@ def center_image(image):
 center_image(arena_image)
 center_image(player_image)
 center_image(ball_image)
-

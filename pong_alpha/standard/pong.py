@@ -184,6 +184,7 @@ def update(dt,theta,arena):
 			pass
 		game_window.close()
 
+# synchronization dot updates
 def sync_on(dt):
 	global pix_record
 	if not (game_flow.in_play == "before"):

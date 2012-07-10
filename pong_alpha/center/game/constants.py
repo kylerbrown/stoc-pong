@@ -3,11 +3,11 @@
 import math
 
 class Constants():
-	def __init__(self, gameWindow):
+	def __init__(self, gameWindow, radius):
 		# screen position constants
 		self.centerX = 0.5 * gameWindow.width
 		self.centerY = 0.5 * gameWindow.height
-		self.gameRadius = 180		# original radius based on path.png 
+		self.gameRadius = radius	# original radius based on path.png 
 									#  image size is 150px
 		# constants from the original path image
 		self.pathWidth = 2.5	
