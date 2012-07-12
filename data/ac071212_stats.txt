@@ -1,0 +1,2 @@
+Theta: 90
+Game Type: standard
