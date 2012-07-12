@@ -1,4 +1,4 @@
-﻿# PONG.PY - basic pong game
+# PONG.PY - basic pong game
 
 import pyglet, random, datetime, math, time, sys
 from pyglet.window import key
@@ -77,6 +77,9 @@ game_window.push_handlers(player_paddle.key_handler)
 game_window.push_handlers(ball.key_handler)
 game_window.push_handlers(game_flow.key_handler)
 
+global count # global variable for number of file writes
+count = 0
+
 # Paint screen
 @game_window.event
 def on_draw():
@@ -119,14 +122,14 @@ def update(dt,theta,arena):
 			dot.visible = True
 
 	if game_flow.in_play == "paused":
-		#print_str="ball\t paddle\ttimestamp\n"
 		print_str = ""
-		#pix_str="pixel flash on\n"
 		pix_str = ""
+		header = "%s,standard" % (sys.argv[1])
+		global count
 
 		for i in range(len(ball_clone.record)):
-			print_str = print_str+repr(ball_clone.record[i])+"\t"+ \
-				repr(player_clone.record[i])+"\n"
+			print_str = print_str+ball_clone.record[i]+","+ \
+				player_clone.record[i]+"\n"
 
 		for rec in pix_record:
 			pix_str = pix_str + repr(rec) + "\n"			
@@ -136,7 +139,7 @@ def update(dt,theta,arena):
 		# print filename
 		try:
  			f = open("../data/"+filename+".txt", "a")
-			try:
+			try:			
 				f.write(print_str)
 			finally:
 				f.close()
@@ -146,6 +149,15 @@ def update(dt,theta,arena):
 				f.write(pix_str)
 			finally:
 				f.close()
+
+			if count==0:
+				f = open("../data/"+filename+"_stats.txt","a")
+				try:
+					f.write(header)
+					count = count + 1
+				finally:
+					f.close()
+			
 		except IOError:
 			pass
 
