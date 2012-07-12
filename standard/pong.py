@@ -1,10 +1,15 @@
 # PONG.PY - basic pong game
 
-import pyglet, random, datetime, math, time, sys
+import pyglet, random, datetime, math, time, sys, os
 from pyglet.window import key
 from pyglet import clock
 from game import resources, player, ball, arena, ui, clone
 from pyglet.gl import *
+
+# check if record file already exists
+path = "../data/"+sys.argv[2]+".txt"
+if os.path.exists(path):
+	raise NameError('Filename taken.')
 
 # Initialize window
 game_window = pyglet.window.Window(fullscreen=True,vsync=True)
@@ -124,7 +129,7 @@ def update(dt,theta,arena):
 	if game_flow.in_play == "paused":
 		print_str = ""
 		pix_str = ""
-		header = "%s,standard" % (sys.argv[1])
+		header = "Theta: %s\nGame Type: standard" % (sys.argv[1])
 		global count
 
 		for i in range(len(ball_clone.record)):
