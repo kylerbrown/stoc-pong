@@ -1,0 +1,23 @@
+# CONSTANTS.PY - set game constants here
+
+import math
+
+class Constants():
+	def __init__(self, gameWindow, radius):
+		# screen position constants
+		self.centerX = 0.5 * gameWindow.width
+		self.centerY = 0.5 * gameWindow.height
+		self.gameRadius = radius	# original radius based on path.png 
+									#  image size is 150px
+		# constants from the original path image
+		self.pathWidth = 2.5	
+		self.pathRadius = 0.5 * 300		# i.e.: image width = 300
+		# scaling information for path.png 
+		#  based on original radius of 150px
+		#  also used for paddle placement
+		
+		# element scales
+		self.pathScale = self.gameRadius/self.pathRadius
+		self.ballScale = 0.3
+		self.paddleScale = 0.5
+		self.markerScale = 0.06
